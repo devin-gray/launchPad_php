@@ -10,20 +10,11 @@ class Category extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
-        'name',
-        'slug',
+        'name'
     ];
 
-    /**
-     * Get the blog posts for the category.
-     */
-    public function blogPosts(): HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(BlogPost::class);
     }

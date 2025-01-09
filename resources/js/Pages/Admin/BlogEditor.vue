@@ -63,7 +63,6 @@ async function createNewArticle() {
 
 async function createNewCategory() {
   try {
-    // Validate form data
     if (!newCategoryName.value) {
       error.value = "A category name is required.";
       setTimeout(() => {
@@ -72,23 +71,17 @@ async function createNewCategory() {
       return;
     }
 
-    const response = await axios.post('/api/categories', {
-      name: newCategoryName.value
-    });
-
-    if (response.data.success) {
-      console.log("Category created:", response.data);
-      successBanner.value = "Category Successfully Created";
-      categories.value.push(response.data.data);
-      setTimeout(() => {
-        successBanner.value = "";
-      }, 3000);
-    } else {
-      throw new Error(response.data.message);
-    }
+    const category = await blogStore.createCategory(newCategoryName.value);
+    
+    successBanner.value = "Category Successfully Created";
+    newCategoryName.value = ""; // Clear the input
+    
+    setTimeout(() => {
+      successBanner.value = "";
+    }, 3000);
   } catch (err: any) {
     console.error("Error creating category:", err);
-    error.value = err.message;
+    error.value = err.response?.data?.message || err.message || "Failed to create category";
     setTimeout(() => {
       error.value = "";
     }, 3000);

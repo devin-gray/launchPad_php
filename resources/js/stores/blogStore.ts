@@ -93,11 +93,14 @@ export const useBlogStore = defineStore("blog", {
     async fetchCategories() {
       try {
         const response = await axios.get('/api/categories');
-        if (response.data?.length > 0) {
-          this.categories = response.data;
+        
+        if (response.data.success) {
+          this.categories = response.data.data;
+          return response.data.data;
         }
-        return response.data;
-      } catch (error) {
+        
+        throw new Error(response.data.message || 'Failed to fetch categories');
+      } catch (error: any) {
         console.error('Error fetching categories:', error);
         return [];
       }
@@ -160,6 +163,23 @@ export const useBlogStore = defineStore("blog", {
         throw new Error(response.data.message || 'Failed to unpublish post');
       } catch (error: any) {
         console.error('Error unpublishing post:', error);
+        throw error;
+      }
+    },
+
+    async createCategory(name: string) {
+      try {
+        const response = await axios.post('/api/categories', { name });
+        
+        if (response.data.success) {
+          // Add the new category to the store
+          this.categories.push(response.data.data);
+          return response.data.data;
+        }
+        
+        throw new Error(response.data.message || 'Failed to create category');
+      } catch (error: any) {
+        console.error('Error creating category:', error);
         throw error;
       }
     }

@@ -20,6 +20,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/posts/{id}', [BlogPostController::class, 'update'])->where('id', '[0-9]+');
     Route::post('/posts/upload-image', [BlogPostController::class, 'uploadImage']);
     Route::delete('/posts/delete-image/{path}', [BlogPostController::class, 'deleteImage']);
+    
+    // Category routes
+    Route::post('/categories', [CategoryController::class, 'store']);
+    Route::get('/categories', [CategoryController::class, 'index']);
 });
 
 // Public routes
