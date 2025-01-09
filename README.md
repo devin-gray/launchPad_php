@@ -1,66 +1,180 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LaunchPad CMS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, full-stack CMS starter template built with Laravel, Vue.js, TailwindCSS, Vite, and DaisyUI. Perfect for building content-driven websites with a powerful admin interface.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 🚀 Modern tech stack
+- 🎨 Beautiful UI with DaisyUI components
+- 🌙 Dark/Light mode support
+- 📝 Markdown editor for content
+- 🔐 Role-based authentication
+- 📱 Responsive design
+- 🖼️ Image upload support
+- 📊 Admin dashboard
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### PHP & Composer
 
-## Learning Laravel
+#### Windows
+1. Install PHP 8.1 or higher:
+   - Download PHP from [windows.php.net](https://windows.php.net/download/)
+   - Extract to `C:\php`
+   - Add `C:\php` to your system's PATH environment variable
+   - Rename `php.ini-development` to `php.ini`
+   - Enable required extensions in php.ini:
+     - extension=pdo_pgsql
+     - extension=pgsql
+     - extension=fileinfo
+     - extension=curl
+     - extension=mbstring
+     - extension=openssl
+     - extension=zip
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. Install Composer:
+   - Download and run [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### Linux (Ubuntu/Debian)
+```bash
+sudo apt update
+sudo apt install php8.1 php8.1-cli php8.1-common php8.1-pgsql php8.1-xml php8.1-curl php8.1-mbstring php8.1-zip
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### macOS
+```bash
+brew install php
+```
 
-## Laravel Sponsors
+2. Install Composer (Linux/macOS):
+```bash
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+sudo mv composer.phar /usr/local/bin/composer
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### PostgreSQL
 
-### Premium Partners
+#### Windows
+1. Download and install [PostgreSQL](https://www.postgresql.org/download/windows/)
+   - Use the interactive installer by EnterpriseDB
+   - Remember the password you set for the postgres user
+   - Keep the default port (5432)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. Create database and user:
+   - Open SQL Shell (psql) from Start menu
+   - When prompted, use default values (press Enter) and enter your postgres password
+   ```sql
+   CREATE DATABASE launchpad;
+   CREATE USER launchpad_user WITH ENCRYPTED PASSWORD 'your_password';
+   GRANT ALL PRIVILEGES ON DATABASE launchpad TO launchpad_user;
+   ```
 
-## Contributing
+#### Linux (Ubuntu/Debian)
+```bash
+sudo apt install postgresql postgresql-contrib
+sudo -u postgres psql
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### macOS
+```bash
+brew install postgresql
+```
 
-## Code of Conduct
+Then create database and user:
+```sql
+CREATE DATABASE launchpad;
+CREATE USER launchpad_user WITH ENCRYPTED PASSWORD 'your_password';
+GRANT ALL PRIVILEGES ON DATABASE launchpad TO launchpad_user;
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Node.js
+Install Node.js from [nodejs.org](https://nodejs.org/) (LTS version recommended)
 
-## Security Vulnerabilities
+## Installation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Clone the repository:
+```bash
+git clone https://github.com/devin-gray/launchPad_php.git
+cd launchpad
+```
 
-## License
+2. Install PHP dependencies:
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. Install Node.js dependencies:
+```bash
+npm install
+```
+
+4. Configure environment:
+```bash
+# Windows
+copy .env.example .env
+
+# Linux/macOS
+cp .env.example .env
+
+# Then generate key
+php artisan key:generate
+```
+
+5. Update `.env` with your database credentials:
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=launchpad
+DB_USERNAME=launchpad_user
+DB_PASSWORD=your_password
+```
+
+6. Run migrations and seed the database:
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+7. Generate application key and storage link:
+```bash
+php artisan key:generate
+php artisan storage:link
+```
+
+## Running the Application
+
+1. Start the Laravel development server:
+```bash
+php artisan serve
+```
+
+2. In a separate terminal, start the Vite development server:
+```bash
+npm run dev
+```
+
+3. Visit `http://127.0.0.1:8000/` in your browser
+
+## Default Admin Account
+
+Email: admin@example.com
+Password: password
+
+## Troubleshooting
+
+### Windows
+- If you get SSL errors, download the CA certificate from [curl.se](https://curl.se/ca/cacert.pem) and add this to your php.ini:
+  ```ini
+  curl.cainfo = "path/to/cacert.pem"
+  ```
+- If PostgreSQL isn't working, make sure the pgsql extensions are enabled in php.ini
+- If `php artisan serve` fails, make sure PHP is in your PATH
+
+### Linux/macOS
+- If permissions issues occur, check folder permissions:
+  ```bash
+  sudo chown -R $USER:$USER .
+  chmod -R 755 storage bootstrap/cache
+  ```
