@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.md-editor-dark {
+    --md-bk-color: base !important;
+  }
+  
+.md-editor-preview {
+    word-wrap: normal !important; /* Default word wrapping */
+    overflow-wrap: break-word !important; /* Prevents overflow of long words */
+    word-break: normal !important; /* Prevents breaking words at arbitrary points */
+}
+.md-editor-preview h1, h2, h3, h4 {
+    word-wrap: normal !important; /* Default word wrapping */
+    overflow-wrap: break-word !important; /* Prevents overflow of long words */
+    word-break: normal !important; /* Prevents breaking words at arbitrary points */
+}

@@ -1,0 +1,16 @@
+<script setup lang="ts">
+import feature from '../features/feature.vue';
+</script>
+
+<template>
+    <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+        <feature />
+        <feature />
+        <feature />
+        <feature />
+        <feature />
+        <feature />
+    </div>
+</template>
+
+<style></style>
