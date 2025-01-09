@@ -28,7 +28,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <div class="navbar bg-base-100 rounded-md px-4 w-full">
+        <div class="navbar rounded-md px-4 w-full">
             <div class="navbar-start">
                 <div class="dropdown">
                     <label tabindex="0" class="btn btn-ghost lg:hidden">

@@ -29,7 +29,7 @@ function editPost(post: any) {
 async function createNewArticle() {
   try {
     // Validate form data
-    if (!newArticleTitle.value || !selectedCategory.value) {
+    if (!newArticleTitle.value || !selectedCategory.value.id) {
       error.value = "A title and category are required for a new article.";
       setTimeout(() => {
         error.value = "";
@@ -44,17 +44,17 @@ async function createNewArticle() {
       published: false
     };
 
-    const response = await axios.post('/api/posts', newArticle);
+    const response = await axios.post('/api/posts/create', newArticle);
 
     if (response.data.success) {
       console.log("Article created:", response.data);
       router.visit(`/admin/edit-post/${response.data.data.id}`);
     } else {
-      throw new Error(response.data.message);
+      throw new Error(response.data.message || 'Failed to create article');
     }
   } catch (err: any) {
-    console.error("Error creating article:", err);
-    error.value = err.message;
+    console.error("Error creating article:", err.response?.data || err);
+    error.value = err.response?.data?.message || err.message || "Failed to create article";
     setTimeout(() => {
       error.value = "";
     }, 3000);

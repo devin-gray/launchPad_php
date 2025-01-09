@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{f as r,a as t}from"./app-BkwNIxsC.js";/* empty css            */const n={};function o(c,a){return t(),r("div",null," usermgmt ")}const f=e(n,[["render",o]]);export{f as default};

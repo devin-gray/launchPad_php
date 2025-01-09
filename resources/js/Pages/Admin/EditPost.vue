@@ -228,7 +228,7 @@ async function deletePreviewImage() {
             Article Preview:
           </h2>
           <div
-            class="w-full max-h-96 shadow-md rounded-lg border-2 dark:border-gray-900 p-4 overflow-y-auto mb-5"
+            class="w-full max-h-96 shadow-md rounded-lg p-4 overflow-y-auto mb-5"
           >
             <MdPreview :modelValue="post.content" :theme="themeStore.getDarkMode ? 'dark' : 'light'" />
           </div>

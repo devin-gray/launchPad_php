@@ -6,7 +6,8 @@ import axios from "axios";
 export const useBlogStore = defineStore("blog", {
   state: () => ({
     currentPost: {} as IBlogPost,
-    categories: [] as ICategory[]
+    categories: [] as ICategory[],
+    publishedPosts: [] as IBlogPost[]
   }),
   
   getters: {
@@ -15,6 +16,9 @@ export const useBlogStore = defineStore("blog", {
     },
     getCategories(state) {
       return state.categories;
+    },
+    getPublishedPosts(state) {
+      return state.publishedPosts;
     }
   },
   
@@ -96,6 +100,67 @@ export const useBlogStore = defineStore("blog", {
       } catch (error) {
         console.error('Error fetching categories:', error);
         return [];
+      }
+    },
+    
+    async fetchPublishedPosts() {
+      try {
+        console.log('Fetching published posts...');
+        const response = await axios.get('/api/posts/published');
+        
+        if (response.data.success && Array.isArray(response.data.data)) {
+          this.publishedPosts = response.data.data;
+          console.log('Number of published posts:', response.data.data.length);
+          return response.data.data;
+        }
+        
+        console.error('Unexpected response format:', {
+          type: typeof response.data,
+          data: response.data,
+          status: response.status
+        });
+        return this.publishedPosts;
+      } catch (error: any) {
+        console.error('Error fetching published posts:', {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status
+        });
+        return [];
+      }
+    },
+
+    async publishPost(postId: number) {
+      try {
+        const response = await axios.put(`/api/posts/${postId}`, {
+          published: true,
+          publish_date: new Date()
+        });
+
+        if (response.data.success) {
+          return response.data.data;
+        }
+        throw new Error(response.data.message || 'Failed to publish post');
+      } catch (error: any) {
+        console.error('Error publishing post:', error);
+        throw error;
+      }
+    },
+
+    async unpublishPost(postId: number) {
+      try {
+        const response = await axios.put(`/api/posts/${postId}`, {
+          published: false,
+          publish_date: null
+        });
+
+        if (response.data.success) {
+          return response.data.data;
+        }
+        throw new Error(response.data.message || 'Failed to unpublish post');
+      } catch (error: any) {
+        console.error('Error unpublishing post:', error);
+        throw error;
       }
     }
   }

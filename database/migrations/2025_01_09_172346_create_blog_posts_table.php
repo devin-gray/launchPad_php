@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('preview_image_path')->nullable();
             $table->text('summary')->nullable();
             $table->string('user_email');
-            $table->uuid('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             
             $table->timestamps();
         });

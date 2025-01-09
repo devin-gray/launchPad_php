@@ -10,7 +10,7 @@ const blogStore = useBlogStore();
 
 // Hooks
 onMounted(async () => {
-    articles.value = await blogStore.fetchPosts() as IBlogPost[];
+    articles.value = await blogStore.fetchPublishedPosts();
 })
 </script>
 

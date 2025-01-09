@@ -44,6 +44,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * The key type for the model.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);

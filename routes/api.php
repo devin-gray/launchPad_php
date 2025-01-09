@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -10,14 +11,21 @@ Route::get('/test', function () {
     return response()->json(['message' => 'API is working']);
 });
 
-// Blog routes
-Route::get('/posts', [BlogPostController::class, 'index']);
+Route::middleware('auth:sanctum')->group(function () {
+    // Blog routes
+    Route::get('/posts', [BlogPostController::class, 'index']);
+    Route::get('/posts/published', [BlogPostController::class, 'getPublishedPosts']);
+    Route::get('/posts/{id}', [BlogPostController::class, 'show'])->where('id', '[0-9]+');
+    Route::post('/posts/create', [BlogPostController::class, 'create']);
+    Route::put('/posts/{id}', [BlogPostController::class, 'update'])->where('id', '[0-9]+');
+    Route::post('/posts/upload-image', [BlogPostController::class, 'uploadImage']);
+    Route::delete('/posts/delete-image/{path}', [BlogPostController::class, 'deleteImage']);
+});
+
+// Public routes
 Route::get('/blog/{slug}', [BlogPostController::class, 'showBySlug']);
-Route::get('/posts/{id}', [BlogPostController::class, 'show']);
-Route::put('/posts/{id}', [BlogPostController::class, 'update']);
-Route::post('/posts/upload-image', [BlogPostController::class, 'uploadImage']);
-Route::delete('/posts/delete-image/{path}', [BlogPostController::class, 'deleteImage']);
 Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/posts/published', [BlogPostController::class, 'getPublishedPosts']);
 
 // Debug route
 Route::get('/debug-posts', function () {
