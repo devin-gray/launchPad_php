@@ -24,8 +24,8 @@ A modern, full-stack CMS starter template built with Laravel, Vue.js, TailwindCS
    - Add `C:\php` to your system's PATH environment variable
    - Rename `php.ini-development` to `php.ini`
    - Enable required extensions in php.ini:
-     - extension=pdo_pgsql
-     - extension=pgsql
+     - extension=pdo_mysql
+     - extension=mysqli
      - extension=fileinfo
      - extension=curl
      - extension=mbstring
@@ -38,7 +38,7 @@ A modern, full-stack CMS starter template built with Laravel, Vue.js, TailwindCS
 #### Linux (Ubuntu/Debian)
 ```bash
 sudo apt update
-sudo apt install php8.1 php8.1-cli php8.1-common php8.1-pgsql php8.1-xml php8.1-curl php8.1-mbstring php8.1-zip
+sudo apt install php8.1 php8.1-cli php8.1-common php8.1-mysql php8.1-xml php8.1-curl php8.1-mbstring php8.1-zip
 ```
 
 #### macOS
@@ -53,39 +53,43 @@ php composer-setup.php
 sudo mv composer.phar /usr/local/bin/composer
 ```
 
-### PostgreSQL
+### MySQL
 
 #### Windows
-1. Download and install [PostgreSQL](https://www.postgresql.org/download/windows/)
-   - Use the interactive installer by EnterpriseDB
-   - Remember the password you set for the postgres user
-   - Keep the default port (5432)
+1. Download and install [MySQL](https://dev.mysql.com/downloads/installer/)
+   - Use the MySQL Installer for Windows
+   - Install MySQL Server and MySQL Workbench
+   - Remember the password you set for the root user
+   - Keep the default port (3306)
 
 2. Create database and user:
-   - Open SQL Shell (psql) from Start menu
-   - When prompted, use default values (press Enter) and enter your postgres password
+   - Open MySQL Workbench
+   - Connect using root credentials
    ```sql
    CREATE DATABASE launchpad;
-   CREATE USER launchpad_user WITH ENCRYPTED PASSWORD 'your_password';
-   GRANT ALL PRIVILEGES ON DATABASE launchpad TO launchpad_user;
+   CREATE USER 'launchpad_user'@'localhost' IDENTIFIED BY 'your_password';
+   GRANT ALL PRIVILEGES ON launchpad.* TO 'launchpad_user'@'localhost';
+   FLUSH PRIVILEGES;
    ```
 
 #### Linux (Ubuntu/Debian)
 ```bash
-sudo apt install postgresql postgresql-contrib
-sudo -u postgres psql
+sudo apt install mysql-server
+sudo mysql_secure_installation
+sudo mysql
 ```
 
 #### macOS
 ```bash
-brew install postgresql
+brew install mysql
 ```
 
 Then create database and user:
 ```sql
 CREATE DATABASE launchpad;
-CREATE USER launchpad_user WITH ENCRYPTED PASSWORD 'your_password';
-GRANT ALL PRIVILEGES ON DATABASE launchpad TO launchpad_user;
+CREATE USER 'launchpad_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON launchpad.* TO 'launchpad_user'@'localhost';
+FLUSH PRIVILEGES;
 ```
 
 ### Node.js
@@ -123,9 +127,9 @@ php artisan key:generate
 
 5. Update `.env` with your database credentials:
 ```
-DB_CONNECTION=pgsql
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_PORT=5432
+DB_PORT=3306
 DB_DATABASE=launchpad
 DB_USERNAME=launchpad_user
 DB_PASSWORD=your_password
@@ -169,7 +173,7 @@ Password: password
   ```ini
   curl.cainfo = "path/to/cacert.pem"
   ```
-- If PostgreSQL isn't working, make sure the pgsql extensions are enabled in php.ini
+- If MySQL isn't working, make sure the mysql extensions are enabled in php.ini
 - If `php artisan serve` fails, make sure PHP is in your PATH
 
 ### Linux/macOS
