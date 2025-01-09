@@ -64,7 +64,7 @@ const themeStore = useThemeStore();
         <a
           type="button"
           class="btn btn-primary"
-          href="https://buy.stripe.com/4gw17c2Mv7jO4Sc288"
+          href="#"
         >
           Purchase
       </a>

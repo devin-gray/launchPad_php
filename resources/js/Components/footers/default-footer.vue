@@ -25,7 +25,7 @@
                   <h2 class="mb-6 text-sm font-semibold uppercase">Follow us</h2>
                   <ul class="font-medium">
                       <li class="mb-4">
-                          <a href="https://github.com" class="hover:underline ">Github</a>
+                          <a href="https://github.com/devin-gray/launchPad_php" class="hover:underline ">Github</a>
                       </li>
                       <li>
                           <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>

@@ -6,7 +6,7 @@ import { ref } from "vue";
 
 const props = defineProps(["content"]);
 const themeStore = useThemeStore();
-const previewTheme = ref("github");
+const previewTheme = ref("cyanosis");
 // Themes: default, github, vue-press, mk-cute, smart-blue
 </script>
 
